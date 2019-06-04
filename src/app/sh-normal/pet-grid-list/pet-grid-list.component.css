@@ -1,0 +1,33 @@
+mat-grid-tile {
+    border: 1px solid gray;
+    padding: 0;
+}
+
+img {
+    width: 75%;
+    display: block;
+    margin: auto;
+}
+
+#pieces {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    color: green;
+}
+
+div.content {
+    width: 100%;
+    margin: 0;
+}
+div.parent {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+div.pet-image{
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 1;
+}

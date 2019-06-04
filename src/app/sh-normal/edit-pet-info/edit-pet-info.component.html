@@ -1,0 +1,27 @@
+<div class="header" mat-dialog-title>Edit pet</div>
+<div mat-dialog-content>
+    <div class="content-header">
+        <img src="{{data.imagePath}}">
+        <span>{{data.name}}</span>
+    </div>
+    <form class="content-body">
+        <mat-form-field>
+            <input matInput type="text" placeholder="Number of stars" 
+            [(ngModel)]="petInfo.stars" name="stars" maxlength="1"
+            (keypress)="checkInputStars($event)"
+            (focusin)="inputStars()"
+            (focusout)="updateStars($event.srcElement.value)">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Number of pieces" 
+            [(ngModel)]="petInfo.pieces" name="pieces" maxlength="4"
+            (keypress)="checkInputPieces($event)"
+            (focusin)="inputPieces()"
+            (focusout)="updatePieces($event.srcElement.value)">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>
