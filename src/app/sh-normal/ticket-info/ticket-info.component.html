@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="content-header">Your tickets</div>
+  <form class="content-body">
+    <mat-form-field id="basic">
+      <input matInput type="text" placeholder="Number of daily tickets"
+      [(ngModel)]="basicTickets" name="basic" maxlength="2">
+    </mat-form-field>
+    <mat-form-field id="redeem">
+      <input matInput type="text" placeholder="Number of redeems"
+      [(ngModel)]="redeemCount" name="redeem" maxlength="1">
+    </mat-form-field>
+  </form>
+</div>

@@ -8,10 +8,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ShNormalComponent } from './sh-normal.component';
 import { DataService } from '../data.service';
 import { PetGridListComponent } from './pet-grid-list/pet-grid-list.component';
 import { EditPetInfoComponent } from './edit-pet-info/edit-pet-info.component';
+import { TicketInfoComponent } from './ticket-info/ticket-info.component';
 
 @NgModule({
   entryComponents: [
@@ -21,11 +23,13 @@ import { EditPetInfoComponent } from './edit-pet-info/edit-pet-info.component';
     ShNormalComponent, 
     PetGridListComponent,
     EditPetInfoComponent,
+    TicketInfoComponent,
   ],
   imports: [
     CommonModule,
     MatDialogModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
     MatGridListModule,
     MatCheckboxModule,
     MatButtonModule,

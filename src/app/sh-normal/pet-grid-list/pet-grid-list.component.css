@@ -1,9 +1,12 @@
 mat-grid-tile {
-    border: 1px solid gray;
     padding: 0;
 }
 
-img {
+mat-checkbox {
+    font-size: 20px;
+}
+
+#pet{
     width: 75%;
     display: block;
     margin: auto;
@@ -11,23 +14,28 @@ img {
 
 #pieces {
     display: block;
-    font-size: 20px;
+    font-size: 100%;
     text-align: center;
     color: green;
 }
 
-div.content {
+.content {
     width: 100%;
     margin: 0;
 }
-div.parent {
-    position: relative;
-    top: 0;
-    left: 0;
-}
-div.pet-image{
+
+.star-image>img{
     position: absolute;
-    top:0;
-    left: 0;
+    display: block;
+    height: 15%;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
+}
+
+.wrapper {
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .24),
+    0 0 2px rgba(0, 0, 0, .12);
 }

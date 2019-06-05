@@ -1,4 +1,16 @@
-div {
-    max-width: 100%;
-    padding: 16px;
+div.container {
+    width: 100%;
+    display: inline-block;
+}
+
+div.block-1 {
+    widows: 40%;
+    float: left;
+    margin: 1%;
+}
+
+div.block-2 {
+    width: 60%;
+    float: right;
+    margin: 1%;
 }

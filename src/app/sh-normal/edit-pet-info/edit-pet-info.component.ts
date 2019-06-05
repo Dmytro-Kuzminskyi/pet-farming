@@ -1,9 +1,13 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
-export interface PetStarsPieces {
-  stars: number;
-  pieces: number;
+interface Pet {
+  id: number;
+  name: string;
+  starCount: number;
+  pieceCount: number;
+  imagePath: string;
 }
 
 @Component({
@@ -11,86 +15,88 @@ export interface PetStarsPieces {
   templateUrl: './edit-pet-info.component.html',
   styleUrls: ['./edit-pet-info.component.css']
 })
-export class EditPetInfoComponent {
+export class EditPetInfoComponent implements OnInit{
 
-  petInfo: PetStarsPieces = { stars: 0, pieces: 0 };
+  form: FormGroup;
+  petInfo: Pet;
+  starCountInput: number;
+  pieceCountInput: number;
 
-  constructor(public dialogRef: MatDialogRef<EditPetInfoComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data:any) { 
-      this.petInfo.stars = data.starCount;
-      this.petInfo.pieces = data.pieceCount;
-    }
 
-  onCancelClick():void {
+  constructor(
+    private fb: FormBuilder,
+    private dialogRef: MatDialogRef<EditPetInfoComponent>, 
+    @Inject(MAT_DIALOG_DATA) data) { 
+      this.petInfo = data;
+  }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      starCountInput: [this.petInfo.starCount, []],
+      pieceCountInput: [this.petInfo.pieceCount, []]
+    });
+  }
+
+  onCancelClick() {
     this.dialogRef.close();
   }
 
-  checkInput(e: KeyboardEvent) {
-    if ([46, 8, 9, 27, 13, 110, 190].indexOf(e.keyCode) !== -1 ||
-        // Allow: Ctrl+A
-        (e.keyCode == 65 && e.ctrlKey === true) ||
-        // Allow: Ctrl+C
-        (e.keyCode == 67 && e.ctrlKey === true) ||
-        // Allow: Ctrl+V
-        (e.keyCode == 86 && e.ctrlKey === true) ||
-        // Allow: Ctrl+X
-        (e.keyCode == 88 && e.ctrlKey === true) ||
-        // Allow: home, end, left, right
-        (e.keyCode >= 35 && e.keyCode <= 39)) {
-          // let it happen, don't do anything
-          return;
-        }
+  onSaveClick() {
+    this.dialogRef.close(this.form.value);
   }
 
-  checkInputStars(e:KeyboardEvent) {
-    this.checkInput(e);
-    let inputChar = String.fromCharCode(e.keyCode);
-    let regExp = new RegExp('^[0-5]*$');
-    if (regExp.test(inputChar)) 
+  inputCheckStars(e: KeyboardEvent) {
+    if((e.keyCode >= 48 && e.keyCode <=53) || (e.keyCode >= 96 && e.keyCode <=101) || e.keyCode == 8) { 
       return;
-    else
+    } else {
       e.preventDefault();
-  }
-
-  checkInputPieces(e:KeyboardEvent) {
-    this.checkInput(e);
-    let inputChar = String.fromCharCode(e.keyCode);
-    let regExp = new RegExp('^[0-9]*$');
-    if (regExp.test(inputChar)) 
-      return;
-    else
-      e.preventDefault();
-  }
-
-  inputStars() {
-    this.petInfo.stars = null;
-  }
-
-  inputPieces() {
-    this.petInfo.pieces = null;
-  }
-
-  updateStars(value: string) {
-    if (value.length == 0) 
-      this.petInfo.stars = 0;
-    this.data.starCount = this.petInfo.stars;
-  }
-
-  updatePieces(value: string) {
-    if (value.length == 0)
-      this.petInfo.pieces = 0;
-    else {
-      if (this.petInfo.stars == 0 && parseInt(value) > 9)
-        this.petInfo.pieces = 0;
-      if (this.petInfo.stars == 1 && parseInt(value) > 19)
-        this.petInfo.pieces = 0;
-      if (this.petInfo.stars == 2 && parseInt(value) > 49)
-        this.petInfo.pieces = 0;
-      if (this.petInfo.stars == 3 && parseInt(value) > 99)
-        this.petInfo.pieces = 0;
-      if (this.petInfo.stars == 4 && parseInt(value) > 149)
-        this.petInfo.pieces = 0;
     }
-    this.data.pieceCount = this.petInfo.pieces;
   }
+
+  inputCheckPieces(e: KeyboardEvent) {
+    if((e.keyCode >= 48 && e.keyCode <=57) || (e.keyCode >= 96 && e.keyCode <=105) || e.keyCode == 8) { 
+      return;
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  onCheckPieces() {
+    if (this.form.get('starCountInput').value == 0 && this.form.get('pieceCountInput').value > 9)
+      this.form.setValue({
+        starCountInput: this.form.get('starCountInput').value,
+        pieceCountInput: 0
+      });
+    if (this.form.get('starCountInput').value == 1 && this.form.get('pieceCountInput').value > 19)
+      this.form.setValue({
+        starCountInput: this.form.get('starCountInput').value,
+        pieceCountInput: 0
+      });
+    if (this.form.get('starCountInput').value == 2 && this.form.get('pieceCountInput').value > 49)
+      this.form.setValue({
+        starCountInput: this.form.get('starCountInput').value,
+        pieceCountInput: 0
+      });
+    if (this.form.get('starCountInput').value == 3 && this.form.get('pieceCountInput').value > 99)
+      this.form.setValue({
+        starCountInput: this.form.get('starCountInput').value,
+        pieceCountInput: 0
+      });
+    if (this.form.get('starCountInput').value == 4 && this.form.get('pieceCountInput').value > 149)
+      this.form.setValue({
+        starCountInput: this.form.get('starCountInput').value,
+        pieceCountInput: 0
+      });
+    if (this.form.get('starCountInput').value == null)
+      this.form.setValue({
+        starCountInput: 0,
+        pieceCountInput: this.form.get('pieceCountInput').value
+      });
+    if (this.form.get('pieceCountInput').value == null)
+      this.form.setValue({
+        starCountInput: this.form.get('starCountInput').value,
+        pieceCountInput: 0
+      });
+  }
+
 }

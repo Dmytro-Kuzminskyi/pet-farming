@@ -1,7 +1,15 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditPetInfoComponent } from '../edit-pet-info/edit-pet-info.component';
 import PETS from '../../../assets/data/sh-normal-pets.json';
+
+interface Pet {
+  id: number;
+  name: string;
+  starCount: number;
+  pieceCount: number;
+  imagePath: string;
+}
 
 @Component({
   selector: 'app-pet-grid-list',
@@ -10,24 +18,32 @@ import PETS from '../../../assets/data/sh-normal-pets.json';
 })
 export class PetGridListComponent {
 
-  pets: any[];
-  currentPet: any;
+  pets: Pet[];
+  currentPet: Pet;
   editMode = false;
 
   constructor(public dialog: MatDialog) { 
     this.pets = PETS;
   }
 
-  openDialog(pet: any): void {
+  openDialog(pet: Pet) {
     if (this.editMode) {
       this.currentPet = pet;
-      console.log(this.currentPet);
-      const dialogRef = this.dialog.open(EditPetInfoComponent, {
-        width: '250px',
-        data: this.currentPet
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.maxWidth = '250px';
+      dialogConfig.data = this.currentPet;
+      const dialogRef = this.dialog.open(EditPetInfoComponent, dialogConfig);
+
+      dialogRef.afterClosed().subscribe(data => {
+        if (data != undefined) {
+          if (data.starCountInput != null && data.pieceCountInput != null) {
+            this.currentPet.starCount = data.starCountInput;
+            this.currentPet.pieceCount = data.pieceCountInput;
+          }
+        }
+        console.log(this.currentPet);
       });
     }
   }

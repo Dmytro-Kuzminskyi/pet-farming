@@ -1,0 +1,25 @@
+.wrapper {
+    border: 1px solid rgba(0, 0, 0, .03);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .24),
+    0 0 2px rgba(0, 0, 0, .12);
+}
+
+.content-header {
+    padding: 16px;
+    font-size: 20px;
+}
+
+.content-body {
+    padding-left: 16px;
+    display: inline-block;
+}
+
+#basic {
+    padding-right: 16px;
+    max-width: 35%; 
+}
+
+#redeem {
+    padding-right: 16px;
+    max-width: 35%;
+}
