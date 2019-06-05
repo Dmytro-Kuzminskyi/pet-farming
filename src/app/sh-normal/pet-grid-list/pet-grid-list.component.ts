@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditPetInfoComponent } from '../edit-pet-info/edit-pet-info.component';
 import PETS from '../../../assets/data/sh-normal-pets.json';
+import STARS from '../../../assets/data/stars.json';
+
 
 interface Pet {
   id: number;
@@ -21,9 +23,11 @@ export class PetGridListComponent {
   pets: Pet[];
   currentPet: Pet;
   editMode = false;
+  stars: String[];
 
   constructor(public dialog: MatDialog) { 
     this.pets = PETS;
+    this.stars = STARS;
   }
 
   openDialog(pet: Pet) {

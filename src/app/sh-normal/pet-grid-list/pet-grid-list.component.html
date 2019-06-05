@@ -7,11 +7,11 @@
           <img id="pet" src="{{pet.imagePath}}"/>
         </div>       
         <div class="star-image" [ngSwitch]="pet.starCount">
-          <img *ngSwitchCase="1" src="../../../assets/img/stars/1.png"/>
-          <img *ngSwitchCase="2" src="../../../assets/img/stars/2.png"/>
-          <img *ngSwitchCase="3" src="../../../assets/img/stars/3.png"/>
-          <img *ngSwitchCase="4" src="../../../assets/img/stars/4.png"/>
-          <img *ngSwitchCase="5" src="../../../assets/img/stars/5.png"/>
+          <img *ngSwitchCase="1" src="{{stars[0]}}"/>
+          <img *ngSwitchCase="2" src="{{stars[1]}}"/>
+          <img *ngSwitchCase="3" src="{{stars[2]}}"/>
+          <img *ngSwitchCase="4" src="{{stars[3]}}"/>
+          <img *ngSwitchCase="5" src="{{stars[4]}}"/>
           <span *ngSwitchDefault></span>
         </div>
         <span id="pieces">{{pet.pieceCount}}</span>  
